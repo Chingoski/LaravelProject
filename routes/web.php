@@ -18,7 +18,9 @@ Route::get('/', function () {
         'Task3'
     ];
     return view('welcome' , [
-        'tasks'=>$tasks]);
+        'tasks'=>$tasks,
+        'name' => request('name'),
+    ] );
 });
 Route::get('/contact', function () {
     return view('contact');
