@@ -2,7 +2,7 @@
 @section('title' , 'Create')
 @section('content')
 <div class="row">
-    <div class="col col-sm-4">
+    <div class="col col-sm-4 offset-4">
         <h1 class="display-4 text-center">Create a project</h1>
         <form method="POST" action="/projects">
             {{csrf_field()}}

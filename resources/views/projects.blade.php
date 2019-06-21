@@ -6,7 +6,7 @@
 
 <div class="row">
 
-    <div class="col col-sm-4">
+    <div class="col col-md-4 offset-4">
         <h1 class="display-3 text-center">Projects</h1>
         <table class="table table-dark table-hover">
             <thead>

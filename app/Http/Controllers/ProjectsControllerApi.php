@@ -13,6 +13,7 @@ class ProjectsControllerApi extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //GET localhost/api/projects
     public function index()
     {
         return \App\test_project::all()->toArray();
@@ -34,6 +35,7 @@ class ProjectsControllerApi extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //POST localhost/api/projects
     public function store(Request $request)
     {
         $project = new test_project();
@@ -50,6 +52,7 @@ class ProjectsControllerApi extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //GET localhost/api/projects/{id}
     public function show($id)
     {
         return \App\test_project::find($id);
