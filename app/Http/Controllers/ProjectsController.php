@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use App\test_project;
 use Illuminate\Http\Request;
 
@@ -12,63 +13,61 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //GET localhost/projects
     public function index()
     {
-        $projects = \App\test_project::all();
+        $projects = Project::all();
         return view('projects' , compact('projects'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    //GET localhost/projects/create
     public function create()
     {
         return view('create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    //POST localhost/projects
+    public function store()
     {
-        $project = new test_project();
-        $project->project_name = $request['project_name'];
-        $project->description = $request['description'];
-        $project->status = 0;
-        $project->save();
+       $atributes =  request()->validate([
+            'project_name' => ['required' ,'min:3' , 'max:100'],
+            'description' => ['required' , 'min:10', 'max:255'],
+            'status'=>['required']
+        ]);
+        Project::create($atributes);
         return redirect('/projects');
     }
-
     /**
      * Display the specified resource.
      *
      * @param  \App\test_project  $test_project
      * @return \Illuminate\Http\Response
      */
-    public function show(string $id, Request $r)
+    //GET localhost/projects/{id}
+    public function show(Project $project)
     {
-        $project = test_project::find($id);
         return view('project',compact('project'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\test_project  $test_project
      * @return \Illuminate\Http\Response
      */
-    public function edit(string $id)
+    //GET localhost/projects/{id}/edit
+    public function edit(Project $project)
     {
-        $project = test_project::find($id);
-        //dd($project);
         return view('edit' , compact('project'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -76,25 +75,27 @@ class ProjectsController extends Controller
      * @param  \App\test_project  $test_project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, string $id)
+    //PATCH localhost/projects/{id}
+    public function update(Project $project)
     {
-        $project = test_project::find($id);
-        $project->project_name = $request['project_name'];
-        $project->description = $request['description'];
-        $project->status = $request['status'];
-        $project->save();
+        $atributes = request()->validate([
+            'project_name' => ['required' ,'min:3' , 'max:100'],
+            'description' => ['required' , 'min:10', 'max:255'],
+            'status' => ['required']
+        ]);
+        $project->update($atributes);
         return redirect('/projects');
     }
-
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\test_project  $test_project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(string $id)
+    //DELETE localhost/project/{id}
+    public function destroy(Project $project)
     {
-        $result = \App\test_project::destroy($id);
+        $project->delete();
         return redirect('/projects');
     }
 }

@@ -8,10 +8,10 @@
                 {{method_field('PATCH')}}
                 {{csrf_field()}}
                 <div class="form-group">
-                    <input name="project_name" class="form-control" type="text" placeholder="Name" value="{{$project->project_name}}">
+                    <input name="project_name" class="form-control {{$errors->has('project_name')? 'border border-danger' : ''}}" type="text" placeholder="Name" value="{{$project->project_name}}" required>
                 </div>
                 <div class="form-group">
-                    <textarea name="description" type="text" class="form-control" placeholder="Description">{{$project->description}}</textarea>
+                    <textarea name="description" type="text" class="form-control {{$errors->has('description')? 'border border-danger' : ''}}" placeholder="Description" required>{{$project->description}}</textarea>
                 </div>
                 <div class="form-group">
                     <div class="form-check">
@@ -27,12 +27,25 @@
                         </label>
                     </div>
                 </div>
+                @if($errors->any())
+                    <div >
+                        <ul class="list-group text-white rounded-pill" style="margin-bottom: 10px">
+                            @foreach($errors->all() as $error)
+                                <li class="list-group-item bg-danger">{{$error}}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <button class="btn btn-primary" type="submit">Update</button>
                 <form method="GET" action="/projects">
                     <button class="btn btn-primary" type="submit">Back</button>
                 </form>
             </form>
-
+            <form method="POST" action=/projects/{{$project->id}}">
+                {{method_field('DELETE')}}
+                {{csrf_field()}}
+                <button class="btn btn-primary" type="submit">Delete</button>
+            </form>
         </div>
     </div>
 @endsection

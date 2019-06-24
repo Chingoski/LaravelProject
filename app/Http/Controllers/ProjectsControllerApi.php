@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
 use App\test_project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -16,7 +17,7 @@ class ProjectsControllerApi extends Controller
     //GET localhost/api/projects
     public function index()
     {
-        return \App\test_project::all()->toArray();
+        return Project::all()->toArray();
     }
 
     /**
@@ -28,7 +29,6 @@ class ProjectsControllerApi extends Controller
     {
 
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -36,14 +36,14 @@ class ProjectsControllerApi extends Controller
      * @return \Illuminate\Http\Response
      */
     //POST localhost/api/projects
-    public function store(Request $request)
+    public function store()
     {
-        $project = new test_project();
-        $project->project_name = $request['project_name'];
-        $project->description = $request['description'];
-        $project->status = 0;
-        $project->save();
-        return $project;
+        $atributes = request()->validate([
+            'project_name' => ['required' ,'min:3' , 'max:100'],
+            'description' => ['required' , 'min:10', 'max:255'],
+            'status' => ['required']
+        ]);
+        return Project::create($atributes);
     }
 
     /**
@@ -53,9 +53,9 @@ class ProjectsControllerApi extends Controller
      * @return \Illuminate\Http\Response
      */
     //GET localhost/api/projects/{id}
-    public function show($id)
+    public function show(Project $project)
     {
-        return \App\test_project::find($id);
+        return $project;
     }
 
     /**
@@ -68,7 +68,6 @@ class ProjectsControllerApi extends Controller
     {
 
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -76,13 +75,15 @@ class ProjectsControllerApi extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update( Request $request,string $id)
+    public function update(Project $project)
     {
-        $project = test_project::find($id);
-        $project->project_name = $request['project_name'];
-        $project->description = $request['description'];
-        $project->save();
-        return $project;
+        $atributes = request()->validate([
+            'project_name' => ['required' ,'min:3' , 'max:100'],
+            'description' => ['required' , 'min:10', 'max:255'],
+            'status' => ['required']
+        ]);
+        $project->update($atributes);
+        return $project ;
     }
 
     /**
@@ -91,9 +92,9 @@ class ProjectsControllerApi extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        $result = \App\test_project::destroy($id);
-        return $result;
+        $result = $project->delete();
+        return (string)$result;
     }
 }

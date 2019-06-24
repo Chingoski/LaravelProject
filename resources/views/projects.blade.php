@@ -36,8 +36,8 @@
                             <li class="list-inline-item"><a class="btn btn-primary text-white" href="/projects/{{$project->id}}/edit">Edit</a></li>
                             <li class="list-inline-item">
                                 <form method="POST" action=/projects/{{$project->id}}">
-                                    {{csrf_field()}}
                                     {{method_field('DELETE')}}
+                                    {{csrf_field()}}
                                     <button class="btn btn-primary" type="submit">Delete</button>
                                 </form>
                             </li>
