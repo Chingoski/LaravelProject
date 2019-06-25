@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="row">
+<div class="row" style="margin-top: 10px;">
 
     <div class="col col-md-4 offset-4">
         <h1 class="display-3 text-center">Projects</h1>
@@ -47,6 +47,7 @@
             @endforeach
             </tbody>
         </table>
+        {{$projects->links()}}
         <form method="GET" action="/projects/create">
             {{csrf_field()}}
             <button class="btn btn-primary" type="submit">Add new task</button>

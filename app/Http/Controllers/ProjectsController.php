@@ -16,7 +16,7 @@ class ProjectsController extends Controller
     //GET localhost/projects
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::paginate(10);
         return view('projects' , compact('projects'));
     }
     /**
@@ -27,6 +27,7 @@ class ProjectsController extends Controller
     //GET localhost/projects/create
     public function create()
     {
+
         return view('create');
     }
     /**
