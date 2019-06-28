@@ -20,6 +20,7 @@ class CreateTasksTable extends Migration
             $table->boolean('status');
             $table->timestamps();
             $table->foreign('project_id')->references('id')->on('test_projects')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 

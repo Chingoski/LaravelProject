@@ -19,6 +19,7 @@ class CreateTestProjects extends Migration
             $table->text('description');
             $table->boolean('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
