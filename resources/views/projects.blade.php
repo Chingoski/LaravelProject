@@ -1,4 +1,4 @@
-@extends('partial_views/Layout')
+@extends('layouts.app')
 
 @section('title' ,'Projects')
 

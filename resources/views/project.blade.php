@@ -1,9 +1,9 @@
-@extends('partial_views/Layout')
+@extends('layouts.app')
 @section('title' , 'Create')
 @section('content')
 <div class="container" style="margin-top: 10px;">
     <div class="row">
-    <div class="col col-md-4 offset-4">
+    <div class="col col-md-6 offset-3">
         <div class="card">
             <div class="card-body">
                 <h1 class="card-title text-center">{{$project->project_name}}</h1>

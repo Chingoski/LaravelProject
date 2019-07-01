@@ -27,3 +27,6 @@ Route::resource('projects', 'ProjectsController');
 //Route::get('projects/{project}/edit','projects@edit');//open form for editing an entity
 //Route::put('/projects/{project}','projects@update');//save changes after editing
 //Route::delete('/projects/{project}','projects@delete');//delete entity
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
