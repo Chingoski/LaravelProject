@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');//->only(['store']);
+    }
+
     //GET localhost/projects
     public function index()
     {
-        $projects =Project::where('user_id' , auth()->user()->id)->paginate(10);
+        $projects =Project::where('user_id' , auth()->id())->paginate(10);
         return view('projects' , compact('projects'));
     }
 

@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 class TasksController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');//->only(['store']);
+    }
     public function update(string $id){
         $task = Task::find($id);
         if(request()->has('status')){

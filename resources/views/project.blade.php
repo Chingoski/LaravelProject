@@ -8,11 +8,9 @@
             <div class="card-body">
                 <h1 class="card-title text-center">{{$project->project_name}}</h1>
                 <p class="card-text">{{$project->description}}</p>
-
+                @if($project->tasks->count()!=0)
                 @if($project->tasks->count() && $tasks =  $project->tasks()->paginate(4))
                     <h1 class="display-4">Tasks:</h1>
-
-
                 <ul class="list-group" style="margin-bottom: 10px">
                     @foreach($tasks as $task)
                         <li class="list-group-item">
@@ -35,7 +33,7 @@
                 </ul>
                 @endif
                 {{$tasks->links()}}
-
+                @endif
                     <form method="POST" action="/projects/{{$project->id}}/tasks">
                         @csrf
                         <div class="form-group">

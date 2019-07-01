@@ -18,7 +18,7 @@ Route::get('/about' ,'PagesControler@about');
 Route::patch('/tasks/{id}', 'TasksController@update');
 Route::post('projects/{project}/tasks' , 'TasksController@create');
 
-Route::resource('projects', 'ProjectsController');
+Route::resource('projects', 'ProjectsController');//->middleware('auth');
 
 //Route::get('/projects' , 'projects@index'); //show all projects
 //Route::get('/projects/create','projects@create');//open form for creating db entity
