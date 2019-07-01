@@ -7,6 +7,7 @@ use App\test_project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProjectsControllerApi extends Controller
 {
@@ -15,7 +16,7 @@ class ProjectsControllerApi extends Controller
     {
         //DB::enableQueryLog();
         //dd(DB::getQueryLog());
-        return Project::with('tasks')->paginate();
+        return $this->getResponseData(Response::HTTP_OK , 'Success' , Project::with('tasks')->paginate() );
     }
 
     public function create()
