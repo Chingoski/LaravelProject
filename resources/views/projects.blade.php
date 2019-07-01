@@ -7,7 +7,8 @@
 <div class="row" style="margin-top: 10px;">
 
     <div class="col col-md-4 offset-4">
-        <h1 class="display-3 text-center">Projects</h1>
+        @if(auth()->check())
+            <h1 class="display-3 text-center">Projects</h1>
         <table class="table table-dark table-hover">
             <thead>
             <th>Name</th>
@@ -15,6 +16,7 @@
             <th>Actions</th>
             </thead>
             <tbody>
+
             @foreach($projects as $project)
                 <tr>
                     <td>@if($project->status)
@@ -48,10 +50,13 @@
             </tbody>
         </table>
         {{$projects->links()}}
-        <form method="GET" action="/projects/create">
-            {{csrf_field()}}
-            <button class="btn btn-primary" type="submit">Add new task</button>
-        </form>
+            <form method="GET" action="/projects/create">
+                {{csrf_field()}}
+                <button class="btn btn-primary" type="submit">Add new task</button>
+            </form>
+        @else
+            <h1 class="display-3 text-center">Sign in to view your projects</h1>
+        @endif
     </div>
 </div>
 

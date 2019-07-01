@@ -16,7 +16,7 @@ class Project extends Model
        'status' => 0
    ];
    protected $fillable= [
-       'project_name' , 'description' , 'status'
+       'project_name' , 'description' , 'status' , 'user_id'
    ];
    //protected $with = ['tasks'];
    public function tasks(){

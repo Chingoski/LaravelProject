@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Project;
 use App\test_project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectsController extends Controller
 {
     //GET localhost/projects
     public function index()
     {
-        $projects = Project::paginate(10);
+        $projects =Project::where('user_id' , auth()->user()->id)->paginate(10);
         return view('projects' , compact('projects'));
     }
 
@@ -27,9 +28,11 @@ class ProjectsController extends Controller
     {
        $atributes =  request()->validate([
             'project_name' => ['required' ,'min:3' , 'max:100'],
+            'user_id'=>['required ' , 'integer'],
             'description' => ['required' , 'min:10', 'max:255'],
             'status'=>['required']
         ]);
+//       dd($atributes);
         Project::create($atributes);
         return redirect('/projects');
     }

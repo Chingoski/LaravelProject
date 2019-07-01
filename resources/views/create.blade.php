@@ -9,6 +9,7 @@
             <div class="form-group">
                 <input name="project_name" class="form-control {{$errors->has('project_name')? 'border border-danger' : ''}}" type="text" placeholder="Name" required value="{{old('project_name')}}">
                 <input name="status" class="form-control" type="hidden" value="0" >
+                <input name="user_id" class="form-control" type="hidden" value="{{Auth::user()->id}}" >
             </div>
             <div class="form-group">
                 <textarea name="description" type="text" class="form-control {{$errors->has('description')? 'border border-danger' : ''}}" placeholder="Description" required >{{old('description')}}</textarea>
